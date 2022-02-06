@@ -19,7 +19,20 @@ bye
 
 
 ## Connecting the remote (SNU)
-hi
+
+You can access our server using a remote desktop client. On Windows, use remote desktop client app (should be available by default); on OSX, use RDP.
+
+Connect to remote using the following credential:
+
+- Host: 147.46.114.95
+- ID: rtas
+- PW: rtas
+
+### Windows Client
+
+### OSX Client
+
+
 
 <div style="page-break-after: always;"></div>
 
@@ -179,13 +192,26 @@ Computer 1 is running our AD stack implementation based on [Autoware.AI](https:/
 - press `w`/`s` keys to zoom in/out.
 - Press `Ctrl-C` at the `expb` terminal to stop the experiment.
 
-### What to expect
+## What to expect
 
-### Design
+## Design
 
-### Interpreting the results
 
-### Configurable Parameter
+## Interpreting the results
+
+## Configurable Parameter
+
+#### Common parameter
+
+| parameter | description | effect |
+|:--:|:--:|:--:|
+|`res_t_log`|hi|hi|
+
+#### Common parameter
+
+| parameter | description | effect |
+|:--:|:--:|:--:|
+| hi |hi|hi|
 
 
 <div style="page-break-after: always;"></div>
