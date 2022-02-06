@@ -206,13 +206,74 @@ Computer 1 is running our AD stack implementation based on [Autoware.AI](https:/
 | parameter | description | effect |
 |:--:|:--:|:--:|
 |`res_t_log`|hi|hi|
+|`ndt_lkas_flag`|hi|hi|
+|`pnorm_threshold`|hi|hi|
 
-#### Common parameter
+#### voxel_grid_filter
 
 | parameter | description | effect |
 |:--:|:--:|:--:|
-| hi |hi|hi|
+|`leaf_size`|hi|hi|
+|`measurement_range`|hi|hi|
 
+#### ndt_matching
+
+| parameter | description | effect |
+|:--:|:--:|:--:|
+|`get_height`|hi|hi|
+|`time_wall`|hi|hi|
+|`accuracy_log`|hi|hi|
+
+#### ndt_config
+
+| parameter | description | effect |
+|:--:|:--:|:--:|
+|`init_*`|hi|hi|
+|`resolution`|hi|hi|
+|`step_size`|hi|hi|
+|`trans_epsilon`|hi|hi|
+|`max_iterations`|hi|hi|
+
+#### lidar_euclidean_cluster_detect
+
+| parameter | description | effect |
+|:--:|:--:|:--:|
+|`clip_min_height`|hi|hi|
+|`clip_max_height`|hi|hi|
+|`cluster_size_min`|hi|hi|
+|`cluster_size_max`|hi|hi|
+
+#### op_common_params
+
+| parameter | description | effect |
+|:--:|:--:|:--:|
+|`pathDensity`|hi|hi|
+|`rollOutDensity`|hi|hi|
+|`rollOutsNumber`|hi|hi|
+|`maxVelocity`|hi|hi|
+|`maxAcceleration`|hi|hi|
+|`maxDeceleration`|hi|hi|
+|`width`|hi|hi|
+|`length`|hi|hi|
+|`wheelBaseLength`|hi|hi|
+|`turningRadius`|hi|hi|
+|`maxSteerAngle`|hi|hi|
+|`steeringDelay`|hi|hi|
+
+#### op_global_planner
+
+| parameter | description | effect |
+|:--:|:--:|:--:|
+|`use_static_goal`|hi|hi|
+|`multilap_flag`|hi|hi|
+|`goal_pos_*`|hi|hi|
+|`goal_ori_*`|hi|hi|
+
+#### lkas
+
+| parameter | description | effect |
+|:--:|:--:|:--:|
+|`debug_window`|hi|hi|
 
 <div style="page-break-after: always;"></div>
 
