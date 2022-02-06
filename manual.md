@@ -38,12 +38,9 @@ Double-click `acc.bat` (Fig. 11(a)), and `density.bat` (Fig. 11(b) and (c)) to r
     <img src="https://user-images.githubusercontent.com/44594966/152480130-0e88e3e5-153f-40e9-a6fb-8218fddf41d5.PNG" alt="syn" width="450" height="300"/>
 </div>
 
-By default parameter setting, `acc.bat` takes about 15 minutes and `density.bat` takes 50 minutes.
+By default parameter setting, `acc.bat` takes about 15 minutes and `density.bat` takes 5 hours.
 For shorter experiments, the `dag_num` and `instance_num` parameters can be reduced. If `dag_num` is 100, `acc.bat` takes only 10 seconds and `density.bat` takes about 3 minutes.
 For details, refer to **Configurable parameter** section.
-
-**TODO : 10000 DAG time for density**
-
 ### Running experiment on local machine
 
 In the case of Experiment (a), since it is simply a python script, it can be executed on your local machine. After you clone our public repository and install only a few python package, you can run execution file in the same way.
@@ -84,38 +81,35 @@ In Fig. 11(a), you will see that the accuracy does not fall compared to the base
 
 ## Configurable parameter
 
+Each parameter has already been set to the value used in the paper.
+However, you can modify as you wish by changing the yaml file inside `syn/cfg`.
+Modify `acc.yaml` for the accuracy experiment (`acc.bat`), and modify `density.yaml` for the density experiment.
+
 <div style="text-align:center;">
     <img src="https://user-images.githubusercontent.com/44594966/152480132-e22b78e3-b523-454f-a40c-76198dc19da0.PNG" alt="syn_cfg" width="450" height="300"/>
 </div>
 
-| parameter | type | description            | effect                            |
-|:-----------:|:------:|:------------------------:|:------------------------:|
-| `exp`     | str (`acc`, `density`, `std`) | select experiment type | hihihihihiihihihihihihihihihihihidishahfioeqnfiqnfdq<br/>wqndpiwqnddqwd |
-|`exp_range`|[start, end, step]|                        |                                   |
-|           |      |                        |                                   |
+The meaning and a brief explanation of each parameter are as follows.
 
-* `exp` (str): select experiment type (`acc`, `density`, `std`)
-* `exp_range` ([start, end, step]): same as python `range()`
-    - `density_range`: The values are on a scale of 100 times (Required in `density` experiment)
-    - `std_range`: The values are on a tenfold scale (Required in `std` experiment)
-* `dag_num` (int): set the number of DAGs
-* `instance_num` (int): set the number of instances
-* `core_num` (int): set the number of cores
-* `node_num` ([mean, dev]): set the number of nodes between `[mean-dev, mean+dev]`
-* `depth` ([mean, dev]): set the depth of DAG between `[mean-dev, mean+dev]`
-* `exec_t` ([mean, dev]): set the execution time of task between `[mean-dev, mean+dev]`
-
-* `backup_ratio` (float): execution time ratio of backup node
-* `sl` : Self-looping node's accuracy function is $A(L) = 1 - e^{-L/sl\_exp + ln0.3} - \left| N(0, sl\_std) \right|$
-    * `sl_unit` (float) : $e_{S, 1}$
-    * `sl_exp` (float)
-    * `sl_std` (float): (Not required in `std` experiment)
-
-* `acceptance_threshold` (int): Acceptance threshold for score function
-* `baseline` ([small, large]): loop count for `BaseLine Small` and `BaseLine Large`
-* `density` (float): (Not required in `density` experiment)
-* `dangling_ratio` (float): dangling DAG node # / total node #
-
+| parameter | type | description | effect |
+|:--:|:--:|:--:|:--:|
+| `exp` | str<br/>(`acc`, `density`, `std`) | Experiment type | `acc`: measure accuracy of approaches<br/>`density`: comparison critical failure ratio according to density<br/>`std`: comparison critical failure ratio according to `sl_std`|
+|`density_range`|[start, end, step]|Tenfold scale range of density to experiment with|Only valid when `exp` is `density`|
+|`std_range`|[start, end, step]|100 times scale range of std to experiment with|Only valid when `exp` is `std`|
+|`dag_num`| int | The number of DAG tasks<br/>to experiment with |A larger value can lead to more accurate results, but the experiment takes longer|
+|`instance_num`| int |The number of instances to experiment with a single DAG task|same as `dag_num`|
+|`core_num`| int |The number of cores $M$|When it is large, generating a feasible DAG with a large density is more difficult|
+|`node_num`| [mean, dev] |The number of nodes $N$ |randomly selected from<br/>`[mean-dev, mean+dev]`|
+|`depth`| [mean, dev] |The depth of DAG|If the depth is small and the $N$ is large, the DAG will have large width|
+|`exec_t`| [mean, dev] |The execution time of node|mean represents $e_{avg}$|
+|`backup_ratio`| float |The execution time ratio of backup node|Larger value is more likely to cause deadline miss |
+|`sl_unit`| float |$e_{S,1}$|-|
+|`sl_exp`| float |$A(L) = 1 - e^{-L/sl\_exp + ln0.3} - abs(\delta)$ |With small `sl_exp`, the acceptable accuracy is reached with fewer loop counts|
+|`sl_std`| float |$\sigma$|a large $\sigma$ models a harsh physical situation with a high probability of physical errors<br/>(Not required in `std` experiment)|
+|`acceptance_threshold`| int |Acceptable accuracy<br/>in 100 times scale|If the value is small, the acceptable accuracy is reached with fewer loop counts|
+|`baseline`| [small, large] |The max loop count for `BaseLine Small` and `BaseLine Large`|Larger value is more likely to cause deadline miss, and smaller value is more likely to cause unaccpetable accuracy|
+|`density`| float | The density of DAG task $\rho$ |deadline $D = \frac{e_{avg} \times N}{\rho \times M}$<br/>(Not required in `density` experiment)|
+|`dangling_ratio`| float | Dangling DAG node # / total node # |Larger value makes the backup DAG simpler|
 
 <div style="page-break-after: always;"></div>
 
