@@ -41,6 +41,7 @@ Double-click `acc.bat` (Fig. 11(a)), and `density.bat` (Fig. 11(b) and (c)) to r
 By default parameter setting, `acc.bat` takes about 15 minutes and `density.bat` takes 5 hours.
 For shorter experiments, the `dag_num` and `instance_num` parameters can be reduced. If `dag_num` is 100, `acc.bat` takes only 10 seconds and `density.bat` takes about 3 minutes.
 For details, refer to **Configurable parameter** section.
+
 ### Running experiment on local machine
 
 In the case of Experiment (a), since it is simply a python script, it can be executed on your local machine. After you clone our public repository and install only a few python package, you can run execution file in the same way.
@@ -105,7 +106,7 @@ The meaning and a brief explanation of each parameter are as follows.
 |`backup_ratio`| float |The execution time ratio of backup node|Larger value is more likely to cause deadline miss |
 |`sl_unit`| float |$e_{S,1}$|-|
 |`sl_exp`| float |$A(L) = 1 - e^{-L/sl\_exp + ln0.3} - abs(\delta)$ |With small `sl_exp`, the acceptable accuracy is reached with fewer loop counts|
-|`sl_std`| float |$\sigma$|a large $\sigma$ models a harsh physical situation with a high probability of physical errors<br/>(Not required in `std` experiment)|
+|`sl_std`| float |$\sigma$|A large $\sigma$ models a harsh physical situation with a high probability of physical errors<br/>(Not required in `std` experiment)|
 |`acceptance_threshold`| int |Acceptable accuracy<br/>in 100 times scale|If the value is small, the acceptable accuracy is reached with fewer loop counts|
 |`baseline`| [small, large] |The max loop count for `BaseLine Small` and `BaseLine Large`|Larger value is more likely to cause deadline miss, and smaller value is more likely to cause unaccpetable accuracy|
 |`density`| float | The density of DAG task $\rho$ |deadline $D = \frac{e_{avg} \times N}{\rho \times M}$<br/>(Not required in `density` experiment)|
@@ -113,21 +114,81 @@ The meaning and a brief explanation of each parameter are as follows.
 
 <div style="page-break-after: always;"></div>
 
-# Experiment (b) (Fig. 1(b))
+# Experiment (b) (Figs. 1(b), 13, and 15)
 
-![connect.bat](https://user-images.githubusercontent.com/44594966/152341296-bd1cf8da-4619-4704-983c-f7aa8c092071.PNG)
+Experiment (b) is an implementation of the autonomous driving (AD) program, covered in Section VII.B in the paper. The implementation is based on [Autoware.AI](https://www.autoware.org/), an open-source AD stack.
+This experiment shows that the proposed safety-guranteeing mechanism is applicable to the actual AD system and can prevent physical errors.
+
+## Overview of Remote setup
+
+Experiment (b) uses two computers:
+1. A Linux computer where the AD stack is run and
+2. A Windows computer that provides a simulated driving environment to computer 1.
+
+### Computer 1
+
+Computer 1 is running our AD stack implementation based on [Autoware.AI](https://www.autoware.org/). The stack is running on Linux virtual machine in Virtualbox. The host machine is Ubuntu.
+
+#### Sepcifications:
+
+* CPU: Intel Core i7-8700 @3.20GHz (6 physical cores)
+* Memory: 16GB
+* Ubuntu 18.04 LTS
+* VirtualBox 6.1
+
+### Computer 2
+
+#### Sepcifications:
+
+* CPU: Intel Core i7-8700 @3.20GHz (6 physical cores)
+* GPU: NVIDIA GeForce RTX 2080 SUPER
+* Memory: 16GB
+* Windows 10 Build 19042.631
+* SVL Simulator Build 2021.3
+
+## Running experiment (b)
+
+### Getting the simulator ready
+
+1. Run the simulator by double-clicking `svl` (on the desktop).
+
+2. Click **Open Browser**, which will automatically show wise.svlsimulator.com website. Sign in with our account if necessary. (jwhan@rubis.snu.ac.kr / rtas2022)
+
+<div style="text-align:center;">
+    <img src="https://user-images.githubusercontent.com/44594966/152669703-290e0d81-3327-45de-ad52-a971e02d9794.PNG" alt="svl_main" width="300"/>
+    <img src="https://user-images.githubusercontent.com/44594966/152669728-96430a56-2bb9-4f03-b863-5a0c4e5c676a.PNG" alt="svl_sign_in" width="300"/>
+</div>
+
+3. Navigate to the **Simulations** tab. Find the simulation instance named **API Only**.
+
+<div style="text-align:center;">
+    <img src="https://user-images.githubusercontent.com/44594966/152669790-95295c03-f62c-4448-8861-ed816c6b130d.PNG" alt="svl_simul" width="300"/>
+</div>
+
+### Running the simulation
+
+1. Double-click the `connect.bat` script on the `impl` directory. This will open up an ssh connection to the AD server. Execute ./core.sh to start the core AD modules.
+
+<div style="text-align:center;">
+    <img src="https://user-images.githubusercontent.com/44594966/152480132-e22b78e3-b523-454f-a40c-76198dc19da0.PNG" alt="syn_cfg" width="450" height="300"/>
+</div>
+
+
+- Observe the vehicle moving in the SVL simulator window.
+- You can right-click and drag to change the view angle or
+- press `w`/`s` keys to zoom in/out.
+- Press `Ctrl-C` at the `expb` terminal to stop the experiment.
+
+### What to expect
+
+### Design
+
+### Interpreting the results
+
+### Configurable Parameter
+
 
 <div style="page-break-after: always;"></div>
-
-# Experiment (c) (Fig. 13)
-
-
-<div style="page-break-after: always;"></div>
-
-# Experiment (d) (Fig. 15)
-
-
-
 
 ## Notes
 Maybe low performance due to virtual machine
