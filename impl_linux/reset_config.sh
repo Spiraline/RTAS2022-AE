@@ -1,0 +1,1 @@
+cp ~/sprialine_ws/cfg/backup/* ~/spiraline_ws/cfg

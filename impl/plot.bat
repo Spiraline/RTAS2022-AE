@@ -1,1 +1,0 @@
-scp -P20022 -r rtas@192.168.0.75:~/spiraline_ws/res .
