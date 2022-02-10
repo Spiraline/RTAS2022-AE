@@ -12,7 +12,7 @@
 Dear AE chair, Thank you for taking the time to evaluate this artifact. We hope that this document will make it easy to reproduce the experiments in the paper and meet the provided criteria. If there is any ambiguity, feel free to contact us through the email address above.
 
 ## A brief overview
-The submitted artifacts consist of experiments for (a) Fig. 11 and (b) Fig. 1b, 13, and 15.
+The submitted artifacts consist of experiments for (a) Fig. 11 and (b) Fig. 1, 13, and 15.
 
 Experiment (a) is a scheduling simulation using synthetic tasks, covered in Section VII.A in the paper. The experiment compares the accuracy of the self-looping node and critical failure ratio of the DAG task of the proposed two budget analyses compared to the baseline in which the loop count is fixed.
 
@@ -147,13 +147,17 @@ This experiment shows that the proposed safety guarantee mechanism is applicable
 
 ## Overview of Remote setup
 
+<div style="text-align:center;">
+    <img src="https://user-images.githubusercontent.com/44594966/153333701-528a4ea1-738d-48b0-9b78-a35cffedb0c0.PNG" alt="remote_stack"/>
+</div>
+
 Experiment (b) uses two machines:
 1. A Linux computer where the AD stack is run and
 2. A Windows computer that provides a simulated driving environment to computer 1.
 
 ### Computer 1
 
-Computer 1 is running our AD stack implementation based on [Autoware.AI](https://www.autoware.org/). The stack is running on Linux virtual machine in Virtualbox. The host machine is Ubuntu.
+Computer 1 executes our AD stack implementation based on [Autoware.AI](https://www.autoware.org/). The stack is run on Linux virtual machine in Virtualbox. The host machine is Ubuntu.
 
 #### Sepcifications:
 
@@ -163,6 +167,8 @@ Computer 1 is running our AD stack implementation based on [Autoware.AI](https:/
 * VirtualBox 6.1
 
 ### Computer 2
+
+Computer 2 runs the [SVL simulator](https://www.svlsimulator.com/). The simulator provides a virtual driving environment. Computer 2 transmits the data obtained by the virtual sensor to Computer 1 and receives vehicle commands from Computer 1.
 
 #### Sepcifications:
 
@@ -176,9 +182,11 @@ Computer 1 is running our AD stack implementation based on [Autoware.AI](https:/
 
 ### Getting the simulator ready
 
+**TODO**
+
 1. Run the simulator by double-clicking `svl` (on the desktop).
 
-2. Click **Open Browser**, which will automatically show wise.svlsimulator.com website. Sign in with our account if necessary. (jwhan@rubis.snu.ac.kr / rtas2022)
+2. Click **Open Browser**, which will automatically show **wise.svlsimulator.com** website. Sign in with our account if necessary. (jwhan@rubis.snu.ac.kr / rtas2022)
 
 <div style="text-align:center;">
     <img src="https://user-images.githubusercontent.com/44594966/152669703-290e0d81-3327-45de-ad52-a971e02d9794.PNG" alt="svl_main" width="300"/>
@@ -199,7 +207,6 @@ Computer 1 is running our AD stack implementation based on [Autoware.AI](https:/
     <img src="https://user-images.githubusercontent.com/44594966/152480132-e22b78e3-b523-454f-a40c-76198dc19da0.PNG" alt="syn_cfg" width="450" height="300"/>
 </div>
 
-
 - Observe the vehicle moving in the SVL simulator window.
 - You can right-click and drag to change the view angle or
 - press `w`/`s` keys to zoom in/out.
@@ -207,12 +214,33 @@ Computer 1 is running our AD stack implementation based on [Autoware.AI](https:/
 
 ## What to expect
 
+Fig. 1(b) shows the accuracy trends according to the loop count of NDT matching in several cases.
+Fig. 13 shows the WCET trends according to the loop count of NDT matching.
+Fig. 15 compares driving progress and execution time of NDT matching for original Autoware and ours, e.g., safety guarantee mechanism applied Autoware.
+
 ## Design
 
+The purpose of this experiment is to provide practical implementation by applying the safety guarantee mechanism to an actual AD software, Autoware.
+
+The implementation is based on the March 2021 snapshot of Autoware.AI. We use 12 nodes of the original autoware. Additionally, `LKAS` is implemented for safety backup, and `gnss_calibrator` is implemented for localization through GNSS sensor. `ndt_matching`, `op_behavior_selector` nodes are modified to activate the safety guarantee mechanism through a parameter.
 
 ## Interpreting the results
+**TODO : script name**
+
+Fig. 1(b) shows the accuracy according to the loop count in several cases. In some cases, you can see the self-looping module, e.g., `ndt_matching` never reaches the acceptable accuracy even though the loop is repeated to the maximum.
+
+In Fig. 13, you will see the trend line of `ndt_matching`, which means $e_{S,1}$.
+
+Through Fig. 15, you will see that the execution of `ndt_matching` does not exceed the budget and car always keeps close to the lane center.
 
 ## Configurable Parameter
+**TODO : script name**
+
+Since we implement from original Autoware, legacy parameters also exist. Therefore, in this experiment, We explain the configurable parameters and the effects of changing them.
+
+There is a yaml file for each experiment in `impl/cfg`, and when `configure.bat` is executed, the modified yaml files are copied to Computer 1 through `scp`.
+
+The meaning and a brief explanation of each parameter are as follows.
 
 #### Common parameter
 
