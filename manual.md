@@ -246,78 +246,65 @@ The meaning and a brief explanation of each parameter are as follows.
 
 | parameter | description | effect |
 |:--:|:--:|:--:|
-|`res_t_log`|hi|hi|
-|`ndt_lkas_flag`|hi|hi|
-|`pnorm_threshold`|hi|hi|
+|`res_t_log`|Decide whether to log response time|-|
+|`ndt_lkas_flag`|Decide whether to activate safety guarantee mechanism|-|
+|`pnorm_threshold`|$1-pnorm\_threshold$ will be accuracy threshold<br/>to activate safety backup|Smaller value activates<br/>safety backup more frequently|
 
 #### voxel_grid_filter
 
 | parameter | description | effect |
 |:--:|:--:|:--:|
-|`leaf_size`|hi|hi|
-|`measurement_range`|hi|hi|
+|`leaf_size`|Filtering strength for input pointcloud|Smaller value makes the execution longer|
+|`measurement_range`|Filtering range|Larger value makes the execution longer|
 
 #### ndt_matching
 
 | parameter | description | effect |
 |:--:|:--:|:--:|
-|`get_height`|hi|hi|
-|`time_wall`|hi|hi|
-|`accuracy_log`|hi|hi|
+|`get_height`|Decide whether to consider z-axis during localization|-|
+|`time_wall`|Budget for self-looping node|Only valid when `ndt_lkas_flag` is `true`|
+|`accuracy_log`|Decide whether to log accuracy<br/>according to the loop count|-|
 
 #### ndt_config
 
 | parameter | description | effect |
 |:--:|:--:|:--:|
-|`init_*`|hi|hi|
-|`resolution`|hi|hi|
-|`step_size`|hi|hi|
-|`trans_epsilon`|hi|hi|
-|`max_iterations`|hi|hi|
+|`init_*`|Where to start localization|The closer it is to the actual vehicle location,<br/>the better the first localization is|
+|`resolution`|Grid size using in NDT algorithm|Larger value may improve localization quality<br/>but makes the execution longer|
+|`step_size`|Maximum gradient update in one loop|Too large value leads to worse localization quality|
+|`trans_epsilon`|$1-trans\_epsilon$ will be<br/>accuracy threshold for localization|Small values makes localization harder|
+|`max_iterations`|Maximum self-looping count|Only valid when `ndt_lkas_flag` is `false`|
 
 #### lidar_euclidean_cluster_detect
 
 | parameter | description | effect |
 |:--:|:--:|:--:|
-|`clip_min_height`|hi|hi|
-|`clip_max_height`|hi|hi|
-|`cluster_size_min`|hi|hi|
-|`cluster_size_max`|hi|hi|
+|`clip_min_height`|Ignore point with a height lower than this value|Inappropriate values can cause the ground to be perceived as an object.|
+|`clip_max_height`|Ignore point with a height higher than this value|The object may not be perceived when it is small|
+|`cluster_size_min`|Minimum number of points in one cluster|-|
+|`cluster_size_max`|Maximum number of points in one cluster|-|
 
 #### op_common_params
 
 | parameter | description | effect |
 |:--:|:--:|:--:|
-|`pathDensity`|hi|hi|
-|`rollOutDensity`|hi|hi|
-|`rollOutsNumber`|hi|hi|
-|`maxVelocity`|hi|hi|
-|`maxAcceleration`|hi|hi|
-|`maxDeceleration`|hi|hi|
-|`width`|hi|hi|
-|`length`|hi|hi|
-|`wheelBaseLength`|hi|hi|
-|`turningRadius`|hi|hi|
-|`maxSteerAngle`|hi|hi|
-|`steeringDelay`|hi|hi|
+|`maxVelocity`|Maximum velocity|Too large value makes driving unstable|
+|`maxAcceleration`|Maximum acceleration|same as `maxVelocity`|
+|`maxDeceleration`|Maximum deceleration|same as `maxVelocity`|
+|`width`|Width of vehicle|Determine safety border of vehicle|
+|`length`|Length of vehicle|same as `width`|
 
 #### op_global_planner
 
 | parameter | description | effect |
 |:--:|:--:|:--:|
-|`use_static_goal`|hi|hi|
-|`multilap_flag`|hi|hi|
-|`goal_pos_*`|hi|hi|
-|`goal_ori_*`|hi|hi|
-
-#### lkas
-
-| parameter | description | effect |
-|:--:|:--:|:--:|
-|`debug_window`|hi|hi|
+|`use_static_goal`|Decide whether to set the goal point with script|You should set goal point in `rviz`<br/>when `false`|
+|`multilap_flag`|Decide whether to continue driving the circular track more than once|-|
+|`goal_*`|Position of the goal point|Only valid when `use_static_goal` is `true`|
 
 <div style="page-break-after: always;"></div>
 
 ## Notes
-Maybe low performance due to virtual machine
-NDT is probability based.
+The experiment in the paper executes the AD stack directly on the host machine, not on a virtual machine. Therefore, quantitative values such as WCET may differ according to differences in machine performance.
+
+Also, NDT is a probability-based algorithm. Therefore, even if the experiment is carried out under the same conditions, the driving may succeed or fail.
