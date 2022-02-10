@@ -9,18 +9,25 @@
 - Seoul National University (SNU)
 
 ## AE Chair
-Thanks
+Dear AE chair, Thank you for taking the time to evaluate this artifact. We hope that this document will make it easy to reproduce the experiments in the paper and meet the provided criteria. If there is any ambiguity, feel free to contact us through the email address above.
 
 ## A brief overview
-hi
+The submitted artifacts consist of experiments for (a) Fig. 11 and (b) Fig. 1b, 13, and 15.
+
+Experiment (a) is a scheduling simulation using synthetic tasks, covered in Section VII.A in the paper. The experiment compares the accuracy of the self-looping node and critical failure ratio of the DAG task of the proposed two budget analyses compared to the baseline in which the loop count is fixed.
+
+Experiment (b) is an implementation of the autonomous driving (AD) program, covered in Section VII.B in the paper. The implementation is based on [Autoware.AI](https://www.autoware.org/), an open-source AD stack.
+This experiment shows that the proposed safety guarantee mechanism is applicable to the actual AD system and can prevent physical errors.
 
 ## About the setup
-bye
+Experiment (b) uses two machines: (1) a Linux computer where the AD stack is run and (2) a Windows computer that provides a simulated driving environment to the computer (1). 
+Both machines require high performance. Additionally, computer (2) requires high-performance GPU e.g., NVIDIA GTX 1080 or higher.
 
+So setting up all of these at your local machine requires a lot of time and effort, and we do not want to ask you to do that. So instead, we can set up remotely accessible servers at SNU(Seoul, South Korea) that you can immediately start assessment without any hassle.
 
 ## Connecting the remote (SNU)
 
-You can access our server using a remote desktop client. On Windows, use remote desktop client app (should be available by default); on OSX, use RDP.
+You can access our server using a remote desktop client. On Windows, use remote desktop client app (Only available on Windows Pro edition); on OSX, use [Microsoft Remote Desktop](https://apps.apple.com/us/app/microsoft-remote-desktop/id1295203466?mt=12).
 
 Connect to remote using the following credential:
 
@@ -30,9 +37,15 @@ Connect to remote using the following credential:
 
 ### Windows Client
 
+<div style="text-align:center;">
+    <img src="https://user-images.githubusercontent.com/44594966/153327218-03a5a27d-c275-4266-9215-2ead362abf2a.PNG" alt="windows_remote" height="300"/>
+</div>
+
 ### OSX Client
 
-
+<div style="text-align:center;">
+    <img src="https://user-images.githubusercontent.com/44594966/153325896-f41035be-c6dd-453e-a4d2-65605bfb4c1c.png" alt="osx_remote" height="300"/>
+</div>
 
 <div style="page-break-after: always;"></div>
 
@@ -130,11 +143,11 @@ The meaning and a brief explanation of each parameter are as follows.
 # Experiment (b) (Figs. 1(b), 13, and 15)
 
 Experiment (b) is an implementation of the autonomous driving (AD) program, covered in Section VII.B in the paper. The implementation is based on [Autoware.AI](https://www.autoware.org/), an open-source AD stack.
-This experiment shows that the proposed safety-guranteeing mechanism is applicable to the actual AD system and can prevent physical errors.
+This experiment shows that the proposed safety guarantee mechanism is applicable to the actual AD system and can prevent physical errors.
 
 ## Overview of Remote setup
 
-Experiment (b) uses two computers:
+Experiment (b) uses two machines:
 1. A Linux computer where the AD stack is run and
 2. A Windows computer that provides a simulated driving environment to computer 1.
 
