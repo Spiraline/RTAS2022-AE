@@ -1,1 +1,1 @@
-scp -P20022 -r .\cfg rtas@192.168.0.75:~/spiraline_ws/cfg
+scp -P20022 -r .\cfg\* rtas@192.168.0.75:~/spiraline_ws/cfg
