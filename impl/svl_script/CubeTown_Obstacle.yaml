@@ -14,18 +14,13 @@ simulator:
   scene: CubeTown
   timeout: 0 # (sec), 0 = infinite 
 
-# Host
+# Remote
 lgsvl_bridge:
-  address: 127.0.0.1
+  address: 192.168.0.75
   port: 9090
 
-# Remote
-# lgsvl_bridge:
-#   address: 192.168.0.16
-#   port: 9000
-
 ego:
-  asset-id: 787db474-5220-496f-adcd-c8e6abce010d # ndt-lkas
+  asset-id: 787db474-5220-496f-adcd-c8e6abce010d
 
 npc:
   -

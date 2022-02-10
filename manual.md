@@ -184,28 +184,40 @@ Computer 2 runs the [SVL simulator](https://www.svlsimulator.com/). The simulato
 
 **TODO**
 
-1. Run the simulator by double-clicking `svl` (on the desktop).
+1. Run the simulator by double-clicking `svl` on the desktop (`C:\Users\rtas\Desktop\svl`).
 
 2. Click **Open Browser**, which will automatically show **wise.svlsimulator.com** website. Sign in with our account if necessary. (jwhan@rubis.snu.ac.kr / rtas2022)
 
 <div style="text-align:center;">
-    <img src="https://user-images.githubusercontent.com/44594966/152669703-290e0d81-3327-45de-ad52-a971e02d9794.PNG" alt="svl_main" width="300"/>
-    <img src="https://user-images.githubusercontent.com/44594966/152669728-96430a56-2bb9-4f03-b863-5a0c4e5c676a.PNG" alt="svl_sign_in" width="300"/>
+    <img src="https://user-images.githubusercontent.com/44594966/152669703-290e0d81-3327-45de-ad52-a971e02d9794.PNG" alt="svl_main" height="250"/>
+    <img src="https://user-images.githubusercontent.com/44594966/153361526-bcaa5fe1-07ab-4291-8397-745666cd5932.png" alt="svl_sign_in" height="250"/>
 </div>
 
-3. Navigate to the **Simulations** tab. Find the simulation instance named **API Only**.
+3. Navigate to the **Simulations** tab. Click the simulation instance named **API Only**. The simulator is now ready.
 
 <div style="text-align:center;">
-    <img src="https://user-images.githubusercontent.com/44594966/152669790-95295c03-f62c-4448-8861-ed816c6b130d.PNG" alt="svl_simul" width="300"/>
+    <img src="https://user-images.githubusercontent.com/44594966/153361776-a2bf7a59-0f6c-453d-b142-118593afbfbc.png" alt="svl_simul" height="250"/>
+    <img src="https://user-images.githubusercontent.com/44594966/153362103-575dee89-43a8-4833-a0e9-c068362900a6.png" alt="svl_simul" height="250"/>
 </div>
 
-### Running the simulation
+### Running the accuracy experiment (Fig. 1(b))
 
-1. Double-click the `connect.bat` script on the `impl` directory. This will open up an ssh connection to the AD server. Execute ./core.sh to start the core AD modules.
+1. Double-click the `connect.bat` script on the `impl` directory. This will open up an ssh connection to the AD server. Enter the password for virtual machine in Computer 1. (PW : rtas)
 
 <div style="text-align:center;">
-    <img src="https://user-images.githubusercontent.com/44594966/152480132-e22b78e3-b523-454f-a40c-76198dc19da0.PNG" alt="syn_cfg" width="450" height="300"/>
+    <img src="https://user-images.githubusercontent.com/44594966/153362505-b0f9a6d4-f72f-4393-9274-b90fe2e53c0a.png" alt="impl" height="250"/>
+    <img src="https://user-images.githubusercontent.com/44594966/153364039-5da107f0-cdd7-4378-bb1a-3da6dfa0c015.png" alt="connect_bat" height="250"/>
 </div>
+
+2. Click **Run Simulation** on SVL website. Simulator app will now display **API ready**.
+
+<div style="text-align:center;">
+    <img src="https://user-images.githubusercontent.com/44594966/153367001-576b4bce-59e9-4678-bf20-81837329bd87.png" alt="run_sim" height="300"/>
+</div>
+
+3. Execute `./acc.sh` on `connect` terminal to start the AD modules and ROS bridge between Autoware and SVL simulator.
+
+
 
 - Observe the vehicle moving in the SVL simulator window.
 - You can right-click and drag to change the view angle or
