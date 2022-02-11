@@ -266,7 +266,7 @@ Computer 2 runs the [SVL simulator](https://www.svlsimulator.com/). The simulato
 
 4. Double-click `svl_obstacle_map.bat` on the `impl` directory.
 
-5. Driving may fail because the safety guarantee mechanism is not applied in this simulation script. Whether or not localization has failed is displayed on the `connect` terminal. The experiment will automatically end after 30s. Close the `svl_obstacle_map` terminal after it ends.
+5. Driving may fail because the safety guarantee mechanism is not applied in this simulation script. Whether or not localization has failed is displayed on the `connect` terminal. The experiment will automatically end after 40s. Close the `svl_obstacle_map` terminal after it ends.
 
 6. Without closing the `connect` terminal, execute `./progress_ours.sh` to start AD modules with safety guarantee mechanism.
 
@@ -274,7 +274,7 @@ Computer 2 runs the [SVL simulator](https://www.svlsimulator.com/). The simulato
 
 8. Double-click `svl_obstacle_map.bat` on the `impl` directory.
 
-9. The experiment will automatically end after 30s. Close the `svl_obstacle_map` terminal after it ends.
+9. The experiment will automatically end after 40s. Close the `svl_obstacle_map` terminal after it ends.
 
 ## What to expect
 
@@ -301,7 +301,9 @@ Fig. 1(b) shows the accuracy according to the loop count in several cases. In so
 
 In Fig. 13, you will see the trend line of `ndt_matching`, which means $e_{S,1}$.
 
-Through Fig. 15, you will see that the execution of `ndt_matching` does not exceed the budget and car always keeps close to the lane center.
+In Fig. 15(a), you will see that car always keeps close to the lane center.
+In Fig. 15(b), you will see that the execution of `ndt_matching` does not exceed the budget, e.g., horizontal line.
+The gray area means the backup mode for Our modified Autoware.
 
 ## Configurable Parameter
 Since we implement from original Autoware, legacy parameters also exist. Therefore, in these experiments, We explain the configurable parameters and the effects of changing them.
