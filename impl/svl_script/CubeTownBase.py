@@ -46,6 +46,9 @@ class Exp(object):
 		ego = sim.add_agent(self.cfg['ego']['asset-id'],
 			lgsvl.AgentType.EGO, ego_state)
 		
+		print(self.cfg['lgsvl_bridge']['address'])
+		print(self.cfg['lgsvl_bridge']['port'])
+
 		ego.connect_bridge(
 		    self.cfg['lgsvl_bridge']['address'],
 		    self.cfg['lgsvl_bridge']['port'])
@@ -126,7 +129,7 @@ class Exp(object):
 			lgsvl.AgentType.PEDESTRIAN, pedestrian_state)
 
 	def setup_sim(self):
-		self.wait_for_bridge()
+		# self.wait_for_bridge()
 		self.create_ego(self.sim)
 		# self.create_npc(self.sim)
 		# self.create_pedestrian(self.sim)
