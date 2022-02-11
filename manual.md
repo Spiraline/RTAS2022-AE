@@ -200,7 +200,7 @@ Computer 2 runs the [SVL simulator](https://www.svlsimulator.com/). The simulato
     <img src="https://user-images.githubusercontent.com/44594966/153362103-575dee89-43a8-4833-a0e9-c068362900a6.png" alt="svl_simul" height="250"/>
 </div>
 
-### Running the accuracy experiment (Fig. 1(b))
+### Experiment b-1) Running the accuracy experiment (Fig. 1(b))
 
 1. Double-click the `connect.bat` script on the `impl` directory. This will open up an ssh connection to the AD server. Enter the password for virtual machine in Computer 1. (PW : rtas)
 
@@ -209,20 +209,64 @@ Computer 2 runs the [SVL simulator](https://www.svlsimulator.com/). The simulato
     <img src="https://user-images.githubusercontent.com/44594966/153364039-5da107f0-cdd7-4378-bb1a-3da6dfa0c015.png" alt="connect_bat" height="250"/>
 </div>
 
-2. Click **Run Simulation** on SVL website. Simulator app will now display **API ready**.
+2. Execute `./acc.sh` on `connect` terminal to start the AD modules and ROS bridge between Autoware and SVL simulator.
+
+<div style="text-align:center;">
+    <img src="https://user-images.githubusercontent.com/44594966/153530809-e49fb93d-538f-465a-9eba-a8b0e3d2b54a.png" alt="acc.sh" height="250"/>
+</div>
+
+3. Click **Run Simulation** on SVL website. Simulator app will now display **API ready**.
 
 <div style="text-align:center;">
     <img src="https://user-images.githubusercontent.com/44594966/153367001-576b4bce-59e9-4678-bf20-81837329bd87.png" alt="run_sim" height="300"/>
 </div>
 
-3. Execute `./acc.sh` on `connect` terminal to start the AD modules and ROS bridge between Autoware and SVL simulator.
+4. Double-click `svl_base_map.bat` on the `impl` directory to run simulation script. You will see the vehicle in the SVL simulator window. 
+(Note: The simulation script is executed correctly only when rosbridge is turned on. So you must follow the steps in order.)
 
+<div style="text-align:center;">
+    <img src="https://user-images.githubusercontent.com/44594966/153531678-45471dc1-3273-4b38-b33c-a33bdb8241e0.png" alt="svl_sim" height="250"/>
+</div>
 
+5. Observe the vehicle moving in the SVL simulator window. The experiment will automatically end after 100s.
 
-- Observe the vehicle moving in the SVL simulator window.
-- You can right-click and drag to change the view angle or
-- press `w`/`s` keys to zoom in/out.
-- Press `Ctrl-C` at the `expb` terminal to stop the experiment.
+    - You can right-click and drag to change the view angle
+    - Press `w`/`s` keys to zoom in/out.
+    - Press `Ctrl-C` at the `connect` terminal to stop the experiment manually.
+
+6. Close the `svl_base_map` terminal.
+
+### Experiment b-2) Running the WCET experiment (Fig. 13)
+
+1. Open the `connect` terminal. (Same as experiment b-1) Skip if the terminal is already on.
+
+2. Execute `./wcet.sh` on `connect` terminal.
+
+3. Click **Run Simulation** on SVL website.
+
+4. Double-click `svl_base_map.bat` on the `impl` directory.
+
+5. The experiment will automatically end after 100s. Close the `svl_base_map` terminal after it ends.
+
+### Experiment b-3) Running the Driving progress experiment (Fig. 15)
+
+1. Open the `connect` terminal. (Same as experiment b-1) Skip if the terminal is already on.
+
+2. Execute `./progress_ndt.sh` on `connect` terminal to start AD modules without safety guarantee mechanism.
+
+3. Click **Run Simulation** on SVL website.
+
+4. Double-click `svl_obstacle_map.bat` on the `impl` directory.
+
+5. Driving may fail because the safety guarantee mechanism is not applied in this simulation script. Whether or not localization has failed is displayed on the `connect` terminal. The experiment will automatically end after 30s. Close the `svl_obstacle_map` terminal after it ends.
+
+6. Without closing the `connect` terminal, execute `./progress_ours.sh` to start AD modules with safety guarantee mechanism.
+
+7. Click **Run Simulation** on SVL website.
+
+8. Double-click `svl_obstacle_map.bat` on the `impl` directory.
+
+9. The experiment will automatically end after 30s. Close the `svl_obstacle_map` terminal after it ends.
 
 ## What to expect
 
@@ -237,7 +281,13 @@ The purpose of this experiment is to provide practical implementation by applyin
 The implementation is based on the March 2021 snapshot of Autoware.AI. We use 12 nodes of the original autoware. Additionally, `LKAS` is implemented for safety backup, and `gnss_calibrator` is implemented for localization through GNSS sensor. `ndt_matching`, `op_behavior_selector` nodes are modified to activate the safety guarantee mechanism through a parameter.
 
 ## Interpreting the results
-**TODO : script name**
+Simulations automatically save the necessary log to Computer 1. When you execute `plot.sh` on `connect` terminal, each log will be parsed and saved as an image file.
+Double-click `impl/get_plot.bat` and enter the password (rtas) to copy image files from Computer 1 to Computer 2. Figures will be copied to `impl/res` directory.
+
+<div style="text-align:center;">
+    <img src="https://user-images.githubusercontent.com/44594966/153536932-b4a9bd20-4884-4014-bd4a-4bf1775c8a03.png" alt="plot_sh" height="250"/>
+    <img src="https://user-images.githubusercontent.com/44594966/153537096-b210b798-925e-4d56-8cb1-b9fde9d06795.png" alt="impl_res" height="250"/>
+</div>
 
 Fig. 1(b) shows the accuracy according to the loop count in several cases. In some cases, you can see the self-looping module, e.g., `ndt_matching` never reaches the acceptable accuracy even though the loop is repeated to the maximum.
 
@@ -246,11 +296,21 @@ In Fig. 13, you will see the trend line of `ndt_matching`, which means $e_{S,1}$
 Through Fig. 15, you will see that the execution of `ndt_matching` does not exceed the budget and car always keeps close to the lane center.
 
 ## Configurable Parameter
-**TODO : script name**
+Since we implement from original Autoware, legacy parameters also exist. Therefore, in these experiments, We explain the configurable parameters and the effects of changing them.
 
-Since we implement from original Autoware, legacy parameters also exist. Therefore, in this experiment, We explain the configurable parameters and the effects of changing them.
+There are yaml files for each experiment in `impl/cfg`.
 
-There is a yaml file for each experiment in `impl/cfg`, and when `configure.bat` is executed, the modified yaml files are copied to Computer 1 through `scp`.
+- `acc_config.yaml`: Expeiment b-1
+- `wcet_config.yaml`: Expeiment b-2
+- `progress_*_config.yaml`: Expeiment b-3
+
+<div style="text-align:center;">
+    <img src="https://user-images.githubusercontent.com/44594966/153537264-e5a861f0-fa2c-4ca9-9636-26f1a5d9d1b1.png" alt="impl_cfg" height="300"/>
+    <img src="https://user-images.githubusercontent.com/44594966/153537455-e388f488-d2b8-455f-ac63-ce6ffa849da3.png" alt="acc_cfg" height="300"/>
+</div>
+
+When you executes `configure.bat`, these files are copied to Computer 1 through secure copy.
+If the experiment does not run normally due to the incorrect configuration, you can run `reset_config.sh` on `connect` terminal to make it the initial setting.
 
 The meaning and a brief explanation of each parameter are as follows.
 
