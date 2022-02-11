@@ -25,6 +25,8 @@ Both machines require high performance. Additionally, computer (2) requires high
 
 So setting up all of these at your local machine requires a lot of time and effort, and we do not want to ask you to do that. So instead, we can set up remotely accessible servers at SNU(Seoul, South Korea) that you can immediately start assessment without any hassle.
 
+<div style="page-break-after: always;"></div>
+
 ## Connecting the remote (SNU)
 
 You can access our server using a remote desktop client. On Windows, use remote desktop client app (Only available on Windows Pro edition); on OSX, use [Microsoft Remote Desktop](https://apps.apple.com/us/app/microsoft-remote-desktop/id1295203466?mt=12).
@@ -78,6 +80,8 @@ python -m pip install -U PyYAML
 python -m pip install matplotlib pandas
 ```
 
+<div style="page-break-after: always;"></div>
+
 ## What to expect
 Fig. 11(a) shows the statistics (i.e., mean, quartiles, minimum and maximum value) of the achieved accuracy by the baseline and our methods. 
 
@@ -105,6 +109,8 @@ Each figure in Fig. 11 will be saved in the `syn/res` directory.
 </div>
 
 In Fig. 11(a), you will see that the accuracy does not fall compared to the baseline, even if the loop count is limited through budget analysis. In Fig. 11(b), you will see proposed mechanism can prevent critical failure.
+
+<div style="page-break-after: always;"></div>
 
 ## Configurable parameter
 
@@ -182,37 +188,37 @@ Computer 2 runs the [SVL simulator](https://www.svlsimulator.com/). The simulato
 
 ### Getting the simulator ready
 
-**TODO**
-
 1. Run the simulator by double-clicking `svl` on the desktop (`C:\Users\rtas\Desktop\svl`).
 
 2. Click **Open Browser**, which will automatically show **wise.svlsimulator.com** website. Sign in with our account if necessary. (jwhan@rubis.snu.ac.kr / rtas2022)
 
 <div style="text-align:center;">
-    <img src="https://user-images.githubusercontent.com/44594966/152669703-290e0d81-3327-45de-ad52-a971e02d9794.PNG" alt="svl_main" height="250"/>
-    <img src="https://user-images.githubusercontent.com/44594966/153361526-bcaa5fe1-07ab-4291-8397-745666cd5932.png" alt="svl_sign_in" height="250"/>
+    <img src="https://user-images.githubusercontent.com/44594966/152669703-290e0d81-3327-45de-ad52-a971e02d9794.PNG" alt="svl_main" height="220"/>
+    <img src="https://user-images.githubusercontent.com/44594966/153361526-bcaa5fe1-07ab-4291-8397-745666cd5932.png" alt="svl_sign_in" height="220"/>
 </div>
 
 3. Navigate to the **Simulations** tab. Click the simulation instance named **API Only**. The simulator is now ready.
 
 <div style="text-align:center;">
-    <img src="https://user-images.githubusercontent.com/44594966/153361776-a2bf7a59-0f6c-453d-b142-118593afbfbc.png" alt="svl_simul" height="250"/>
-    <img src="https://user-images.githubusercontent.com/44594966/153362103-575dee89-43a8-4833-a0e9-c068362900a6.png" alt="svl_simul" height="250"/>
+    <img src="https://user-images.githubusercontent.com/44594966/153361776-a2bf7a59-0f6c-453d-b142-118593afbfbc.png" alt="svl_simul" height="220"/>
+    <img src="https://user-images.githubusercontent.com/44594966/153362103-575dee89-43a8-4833-a0e9-c068362900a6.png" alt="svl_simul" height="220"/>
 </div>
+
+<div style="page-break-after: always;"></div>
 
 ### Experiment b-1) Running the accuracy experiment (Fig. 1(b))
 
 1. Double-click the `connect.bat` script on the `impl` directory. This will open up an ssh connection to the AD server. Enter the password for virtual machine in Computer 1. (PW : rtas)
 
 <div style="text-align:center;">
-    <img src="https://user-images.githubusercontent.com/44594966/153362505-b0f9a6d4-f72f-4393-9274-b90fe2e53c0a.png" alt="impl" height="250"/>
-    <img src="https://user-images.githubusercontent.com/44594966/153364039-5da107f0-cdd7-4378-bb1a-3da6dfa0c015.png" alt="connect_bat" height="250"/>
+    <img src="https://user-images.githubusercontent.com/44594966/153362505-b0f9a6d4-f72f-4393-9274-b90fe2e53c0a.png" alt="impl" height="210"/>
+    <img src="https://user-images.githubusercontent.com/44594966/153364039-5da107f0-cdd7-4378-bb1a-3da6dfa0c015.png" alt="connect_bat" height="210"/>
 </div>
 
 2. Execute `./acc.sh` on `connect` terminal to start the AD modules and ROS bridge between Autoware and SVL simulator.
 
 <div style="text-align:center;">
-    <img src="https://user-images.githubusercontent.com/44594966/153530809-e49fb93d-538f-465a-9eba-a8b0e3d2b54a.png" alt="acc.sh" height="250"/>
+    <img src="https://user-images.githubusercontent.com/44594966/153530809-e49fb93d-538f-465a-9eba-a8b0e3d2b54a.png" alt="acc.sh" height="220"/>
 </div>
 
 3. Click **Run Simulation** on SVL website. Simulator app will now display **API ready**.
@@ -221,11 +227,13 @@ Computer 2 runs the [SVL simulator](https://www.svlsimulator.com/). The simulato
     <img src="https://user-images.githubusercontent.com/44594966/153367001-576b4bce-59e9-4678-bf20-81837329bd87.png" alt="run_sim" height="300"/>
 </div>
 
+<div style="page-break-after: always;"></div>
+
 4. Double-click `svl_base_map.bat` on the `impl` directory to run simulation script. You will see the vehicle in the SVL simulator window. 
 (Note: The simulation script is executed correctly only when rosbridge is turned on. So you must follow the steps in order.)
 
 <div style="text-align:center;">
-    <img src="https://user-images.githubusercontent.com/44594966/153531678-45471dc1-3273-4b38-b33c-a33bdb8241e0.png" alt="svl_sim" height="250"/>
+    <img src="https://user-images.githubusercontent.com/44594966/153531678-45471dc1-3273-4b38-b33c-a33bdb8241e0.png" alt="svl_sim" height="220"/>
 </div>
 
 5. Observe the vehicle moving in the SVL simulator window. The experiment will automatically end after 100s.
@@ -285,8 +293,8 @@ Simulations automatically save the necessary log to Computer 1. When you execute
 Double-click `impl/get_plot.bat` and enter the password (rtas) to copy image files from Computer 1 to Computer 2. Figures will be copied to `impl/res` directory.
 
 <div style="text-align:center;">
-    <img src="https://user-images.githubusercontent.com/44594966/153536932-b4a9bd20-4884-4014-bd4a-4bf1775c8a03.png" alt="plot_sh" height="250"/>
-    <img src="https://user-images.githubusercontent.com/44594966/153537096-b210b798-925e-4d56-8cb1-b9fde9d06795.png" alt="impl_res" height="250"/>
+    <img src="https://user-images.githubusercontent.com/44594966/153536932-b4a9bd20-4884-4014-bd4a-4bf1775c8a03.png" alt="plot_sh" height="220"/>
+    <img src="https://user-images.githubusercontent.com/44594966/153537096-b210b798-925e-4d56-8cb1-b9fde9d06795.png" alt="impl_res" height="220"/>
 </div>
 
 Fig. 1(b) shows the accuracy according to the loop count in several cases. In some cases, you can see the self-looping module, e.g., `ndt_matching` never reaches the acceptable accuracy even though the loop is repeated to the maximum.
@@ -305,8 +313,8 @@ There are yaml files for each experiment in `impl/cfg`.
 - `progress_*_config.yaml`: Expeiment b-3
 
 <div style="text-align:center;">
-    <img src="https://user-images.githubusercontent.com/44594966/153537264-e5a861f0-fa2c-4ca9-9636-26f1a5d9d1b1.png" alt="impl_cfg" height="300"/>
-    <img src="https://user-images.githubusercontent.com/44594966/153537455-e388f488-d2b8-455f-ac63-ce6ffa849da3.png" alt="acc_cfg" height="300"/>
+    <img src="https://user-images.githubusercontent.com/44594966/153537264-e5a861f0-fa2c-4ca9-9636-26f1a5d9d1b1.png" alt="impl_cfg" height="250"/>
+    <img src="https://user-images.githubusercontent.com/44594966/153537455-e388f488-d2b8-455f-ac63-ce6ffa849da3.png" alt="acc_cfg" height="250"/>
 </div>
 
 When you executes `configure.bat`, these files are copied to Computer 1 through secure copy.
@@ -373,8 +381,6 @@ The meaning and a brief explanation of each parameter are as follows.
 |`use_static_goal`|Decide whether to set the goal point with script|You should set goal point in `rviz`<br/>when `false`|
 |`multilap_flag`|Decide whether to continue driving the circular track more than once|-|
 |`goal_*`|Position of the goal point|Only valid when `use_static_goal` is `true`|
-
-<div style="page-break-after: always;"></div>
 
 ## Notes
 The experiment in the paper executes the AD stack directly on the host machine, not on a virtual machine. Therefore, quantitative values such as WCET may differ according to differences in machine performance.
