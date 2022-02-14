@@ -94,7 +94,10 @@ In the case of a density experiment (`density.bat`), it additionally schedules t
 
 ## Interpreting the results
 
-Each figure in Fig. 11 will be saved in the `syn/res` directory.
+The results of each experiment are saved in the `syn/res` directory in the form of csv and image.
+Each row in `acc.csv` means the final accuracy reached for each approach.
+`density_X.csv` indicates the frequency of occurrence for each type of critical failure at a density of $0.X$.
+In our cases, unacceptable accuracy may exist, but critical failure due to unacceptable accuracy is not considered because safety backup exists.
 
 <div style="text-align:center;">
     <img src="https://user-images.githubusercontent.com/44594966/152480134-c88b60de-4df9-42db-bd76-9c5ba4f99250.PNG" alt="syn_res" width="450" height="300"/>
