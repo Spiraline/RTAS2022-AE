@@ -96,7 +96,7 @@ In the case of a density experiment (`density.bat`), it additionally schedules t
 
 The results of each experiment are saved in the `syn/res` directory in the form of csv and image.
 Each row in `acc.csv` means the final accuracy reached for each approach.
-`density_X.csv` indicates the frequency of occurrence for each type of critical failure at a density of 0.X.
+`density_X.csv` indicates the frequency of occurrence for each type of critical failure at a density of *0.X*.
 In our cases, unacceptable accuracy may exist, but critical failure due to unacceptable accuracy is not considered because safety backup exists.
 
 <div style="text-align:center;">
@@ -136,7 +136,7 @@ The meaning and a brief explanation of each parameter are as follows.
 |`sl_std`| float |*σ*|A large *σ* models a harsh physical situation with a high probability of physical errors<br/>(Not required in `std` experiment)|
 |`acceptance_threshold`| int |Acceptable accuracy<br/>in 100 times scale|If the value is small, the acceptable accuracy is reached with fewer loop counts|
 |`baseline`| [small, large] |The max loop count for `BaseLine Small` and `BaseLine Large`|Larger value is more likely to cause deadline miss, and smaller value is more likely to cause unaccpetable accuracy|
-|`density`| float | The density of DAG task *ρ* |deadline <img src="https://user-images.githubusercontent.com/44594966/153800859-fde2b68e-76ba-4a8f-a3de-a1efffed1d1b.png" height="20"><br/>(Not required in `density` experiment)|
+|`density`| float | *ρ* |deadline&nbsp; <img src="https://user-images.githubusercontent.com/44594966/153800859-fde2b68e-76ba-4a8f-a3de-a1efffed1d1b.png" height="30"><br/>(Not required in `density` experiment)|
 |`dangling_ratio`| float | Dangling DAG node # / total node # |Larger value makes the backup DAG simpler|
 
 <div style="page-break-after: always;"></div>
@@ -149,7 +149,7 @@ This experiment shows that the proposed safety guarantee mechanism is applicable
 ## Overview of Remote setup
 
 <div style="text-align:center;">
-    <img src="https://user-images.githubusercontent.com/44594966/153333701-528a4ea1-738d-48b0-9b78-a35cffedb0c0.PNG" alt="remote_stack"/>
+    <img src="https://user-images.githubusercontent.com/44594966/153333701-528a4ea1-738d-48b0-9b78-a35cffedb0c0.PNG" alt="remote_stack" height="160"/>
 </div>
 
 Experiment (b) uses two machines:
@@ -178,6 +178,8 @@ Computer 2 runs the [SVL simulator](https://www.svlsimulator.com/). The simulato
 * Memory: 16GB
 * Windows 10 Build 19042.631
 * SVL Simulator Build 2021.3
+
+<div style="page-break-after: always;"></div>
 
 ## Running experiment (b)
 
@@ -383,6 +385,8 @@ The meaning and a brief explanation of each parameter are as follows.
 The experiment in the paper executes the AD stack directly on the host machine, not on a virtual machine. Therefore, quantitative values such as WCET may differ according to differences in machine performance.
 
 Also, NDT is a probability-based algorithm. Therefore, even if the experiment is carried out under the same conditions, the driving may succeed or fail.
+
+<div style="page-break-after: always;"></div>
 
 ## Local Setup
 
