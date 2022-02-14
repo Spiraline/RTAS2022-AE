@@ -21,7 +21,7 @@ This experiment shows that the proposed safety guarantee mechanism is applicable
 
 ## About the setup
 Experiment (b) uses two machines: (1) a Linux computer where the AD stack is run and (2) a Windows computer that provides a simulated driving environment to the computer (1). 
-Both machines require high performance. Additionally, computer (2) requires high-performance GPU e.g., NVIDIA GTX 1080 or higher.
+Both machines require high performance. Additionally, computer (2) requires high-performance GPU, e.g., NVIDIA GTX 1080 or higher.
 
 So setting up all of these at your local machine requires a lot of time and effort, and we do not want to ask you to do that. So instead, we can set up remotely accessible servers at SNU(Seoul, South Korea) that you can immediately start assessment without any hassle.
 
@@ -136,7 +136,7 @@ The meaning and a brief explanation of each parameter are as follows.
 |`depth`| [mean, dev] |The depth of DAG|If the depth is small and the $N$ is large, the DAG will have large width|
 |`exec_t`| [mean, dev] |The execution time of node|mean represents $e_{avg}$|
 |`backup_ratio`| float |The execution time ratio of backup node|Larger value is more likely to cause deadline miss |
-|`sl_unit`| float |$e_{S,1}$|-|
+|`sl_unit`| float |$e_{s,1}$|-|
 |`sl_exp`| float |$A(L) = 1 - e^{-L/sl\_exp + ln0.3} - abs(\delta)$ |With small `sl_exp`, the acceptable accuracy is reached with fewer loop counts|
 |`sl_std`| float |$\sigma$|A large $\sigma$ models a harsh physical situation with a high probability of physical errors<br/>(Not required in `std` experiment)|
 |`acceptance_threshold`| int |Acceptable accuracy<br/>in 100 times scale|If the value is small, the acceptable accuracy is reached with fewer loop counts|
@@ -280,7 +280,7 @@ Computer 2 runs the [SVL simulator](https://www.svlsimulator.com/). The simulato
 
 Fig. 1(b) shows the accuracy trends according to the loop count of NDT matching in several cases.
 Fig. 13 shows the WCET trends according to the loop count of NDT matching.
-Fig. 15 compares driving progress and execution time of NDT matching for original Autoware and ours, e.g., safety guarantee mechanism applied Autoware.
+Fig. 15 compares driving progress and execution time of NDT matching for original Autoware and ours, i.e., safety guarantee mechanism applied Autoware.
 
 ## Design
 
@@ -297,12 +297,12 @@ Double-click `impl/get_plot.bat` and enter the password (rtas) to copy image fil
     <img src="https://user-images.githubusercontent.com/44594966/153537096-b210b798-925e-4d56-8cb1-b9fde9d06795.png" alt="impl_res" height="220"/>
 </div>
 
-Fig. 1(b) shows the accuracy according to the loop count in several cases. In some cases, you can see the self-looping module, e.g., `ndt_matching` never reaches the acceptable accuracy even though the loop is repeated to the maximum.
+Fig. 1(b) shows the accuracy according to the loop count in several cases. In some cases, you will see the `ndt_matching`, i.e., the self-looping module never reaches the acceptable accuracy even though the loop is repeated to the maximum.
 
-In Fig. 13, you will see the trend line of `ndt_matching`, which means $e_{S,1}$.
+In Fig. 13, you will see the trend line of `ndt_matching`, which means $e_{s,1}$.
 
 In Fig. 15(a), you will see that car always keeps close to the lane center.
-In Fig. 15(b), you will see that the execution of `ndt_matching` does not exceed the budget, e.g., horizontal line.
+In Fig. 15(b), you will see that the execution of `ndt_matching` does not exceed the budget, i.e., horizontal line.
 The gray area means the backup mode for Our modified Autoware.
 
 ## Configurable Parameter
@@ -381,7 +381,7 @@ The meaning and a brief explanation of each parameter are as follows.
 | parameter | description | effect |
 |:--:|:--:|:--:|
 |`use_static_goal`|Decide whether to set the goal point with script|You should set goal point in `rviz`<br/>when `false`|
-|`multilap_flag`|Decide whether to continue driving the circular track more than once|-|
+|`multilap_flag`|Decide whether to continue driving<br/>the circular track more than once|-|
 |`goal_*`|Position of the goal point|Only valid when `use_static_goal` is `true`|
 
 ## Notes
