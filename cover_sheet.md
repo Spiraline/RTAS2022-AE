@@ -484,6 +484,6 @@ Since it is simply a python script, it can be executed on a low-performance mach
 
 6. Change address and port of **lgsvl_bridge** in `impl/svl_script/CubeTownBase.yaml` and `impl/svl_script/CubeTown_Obstacle.yaml` files. Address should be Computer 1's host machine IP.
 
-7. Change port number in `impl/apply_config.bat`, `impl/connect.bat`, `impl/get_plot.bat` to 22. The port number is written after the `-p` option.
+7. Change port number in `impl/apply_config.bat`, `impl/connect.bat`, `impl/get_plot.bat` from 20022 to 22. The port number is written after the `-p` option.
 
 8. Follow the steps [Running experiment (b)](#running-experiment-(b)) with `impl` directory.
