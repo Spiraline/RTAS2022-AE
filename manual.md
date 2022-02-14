@@ -392,12 +392,98 @@ Also, NDT is a probability-based algorithm. Therefore, even if the experiment is
 
 ### Running experiment (a) on local machine
 
-In the case of Experiment (a), since it is simply a python script, it can be executed on your local machine. After you clone our public repository and install only a few python package, you can run execution file in the same way.
+Since it is simply a python script, it can be executed on a low-performance machine. After you clone our public repository and install only a few python package, you can run execution file in the same way.
 
-```
-git clone https://github.com/Spiraline/RTAS2022-DAGGen -b AEC syn
-python -m pip install -U PyYAML
-python -m pip install matplotlib pandas
-```
+1. Install [Python 3](https://www.python.org/).
+
+- We use 3.10.2 version
+
+2. Clone or download as ZIP [Spiraline/RTAS2022-AE](https://github.com/Spiraline/RTAS2022-AE) repository.
+
+    ```
+    git clone https://github.com/Spiraline/RTAS2022-AE
+    ```
+
+3. Install required packages.
+
+    ```
+    python -m pip install -U PyYAML
+    python -m pip install matplotlib pandas
+    ```
+
+4. Follow the steps in [Running experiment (a)](#running-experiment-(a)) with `syn` directory.
 
 ### Running experiment (b) on local machine
+
+#### Computer 1 (machine with AD stack)
+
+1. Install [VituralBox](https://www.virtualbox.org/wiki/Downloads). We use 6.1 version.
+
+2. Create virtual machine with Ubuntu (64-bit)
+
+- We recommend a virtual hard disk size of 30 GB or more. With a smaller size, Autoware build may fail.
+- Download [Ubuntu 18.04.6 iso file](https://releases.ubuntu.com/18.04/) and install Ubuntu from the downloaded file.
+- You can use our image that has already been installed Autoware.
+
+3. Install ROS, Autoware and required packages. We provide a single shell script for all installation procedures in our [Autoware-LKAS](https://github.com/Spiraline/Autoware-LKAS) repository.
+
+    ```
+    sudo apt-get install git -y
+    git clone https://github.com/Spiraline/Autoware-LKAS.git -b AEC rtas
+    cd rtas
+    bash setup/install.sh
+    bash setup/source.sh
+    ```
+
+4. Open `Network Settings` in VirtualBox and add 22 and 9090 ports in `Port Forwarding Rules`. Check guest IP with `ifconfig` command in your virtual machine.
+
+<div style="text-align:center;">
+    <img src="https://user-images.githubusercontent.com/44594966/153808441-17623483-e4b4-47b9-8d78-6c2978bf5f1c.png" alt="network_setting_1" height="250"/>
+    <img src="https://user-images.githubusercontent.com/44594966/153808700-fb0037af-9dcf-4158-b40a-e0d73c8dc81d.png" alt="network_setting_2" height="250"/>
+</div>
+
+<div style="text-align:center;">
+    <img src="https://user-images.githubusercontent.com/44594966/153809466-3c92bbf9-0b19-452b-bdb4-b17b88fe5a12.png" alt="network_setting_3" height="250"/>
+    <img src="https://user-images.githubusercontent.com/44594966/153809426-6df19899-d3da-4974-beb1-f9ecc27f823f.png" alt="network_setting_4" height="250"/>
+</div>
+
+5. Allow firewall of two ports on the host machine if needed.
+
+    ```
+    sudo ufw allow 22
+    sudo ufw allow 9090
+    ```
+
+6. Clone shell script for experiments from [RTAS2022-AE](https://github.com/Spiraline/RTAS2022-AE.git) repository. Use shell scripts in `impl_linux` directory.
+
+    ```
+    git clone https://github.com/Spiraline/RTAS2022-AE.git
+    ```
+
+#### Computer 2 (machine with simulator)
+
+1. Download the [SVL simulator](https://www.svlsimulator.com/) zip file and extract. Create a shortcut to `simulator.exe` if needed.
+
+<div style="text-align:center;">
+    <img src="https://user-images.githubusercontent.com/44594966/153810179-3164826d-57ee-4ca3-82b3-ab6d4301a9ec.png" alt="network_setting_4" height="350"/>
+</div>
+
+2. Install [Python 3](https://www.python.org/).
+
+3. Download [lgsvl/PythonAPI](https://github.com/lgsvl/PythonAPI.git) repository as ZIP file and extract. You can clone repository if you installed git on your machine.
+
+4. Run below commands in repository to install required Python packages.
+
+    ```
+    python -m pip install --upgrade pip
+    python -m pip install -r requirements.txt --user .
+    python -m pip install -U PyYAML
+    ```
+
+5. Download [RTAS2022-AE](https://github.com/Spiraline/RTAS2022-AE.git) repository as ZIP file and extract. You can clone repository if you installed git on your machine.
+
+6. Change address and port of **lgsvl_bridge** in `impl/svl_script/CubeTownBase.yaml` and `impl/svl_script/CubeTown_Obstacle.yaml` files. Address should be Computer 1's host machine IP.
+
+7. Change port number in `impl/apply_config.bat`, `impl/connect.bat`, `impl/get_plot.bat` to 22. The port number is written after the `-p` option.
+
+8. Follow the steps [Running experiment (b)](#running-experiment-(b)) with `impl` directory.
