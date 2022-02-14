@@ -390,13 +390,13 @@ Also, NDT is a probability-based algorithm. Therefore, even if the experiment is
 
 ## Local Setup
 
+All the installation files and the compressed repository required for the experiment are in our server's `Documents` directory. Copy them by `Ctrl+C,V` via remote desktop if needed.
+
 ### Running experiment (a) on local machine
 
 Since it is simply a python script, it can be executed on a low-performance machine. After you clone our public repository and install only a few python package, you can run execution file in the same way.
 
-1. Install [Python 3](https://www.python.org/).
-
-- We use 3.10.2 version
+1. Install [Python 3](https://www.python.org/). We use 3.10.2 version.
 
 2. Clone or download as ZIP [Spiraline/RTAS2022-AE](https://github.com/Spiraline/RTAS2022-AE) repository.
 
@@ -423,7 +423,7 @@ Since it is simply a python script, it can be executed on a low-performance mach
 
 - We recommend a virtual hard disk size of 30 GB or more. With a smaller size, Autoware build may fail.
 - Download [Ubuntu 18.04.6 iso file](https://releases.ubuntu.com/18.04/) and install Ubuntu from the downloaded file.
-- You can use our image that has already been installed Autoware.
+- You can use our VM image (`Documents/ubuntu_rtas.vdi`) that has already been installed Autoware.
 
 3. Install ROS, Autoware and required packages. We provide a single shell script for all installation procedures in our [Autoware-LKAS](https://github.com/Spiraline/Autoware-LKAS) repository.
 
