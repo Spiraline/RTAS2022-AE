@@ -25,11 +25,14 @@ Both machines require high performance. Additionally, computer (2) requires high
 
 So setting up all of these at your local machine requires a lot of time and effort, and we do not want to ask you to do that. So instead, we can set up remotely accessible servers at SNU(Seoul, South Korea) that you can immediately start assessment without any hassle.
 
+We also provide instructions for local setup. Refer to [Local Setup](##local-setup) section if needed.
+
 <div style="page-break-after: always;"></div>
 
 ## Connecting the remote (SNU)
 
-You can access our server using a remote desktop client. On Windows, use remote desktop client app (Only available on Windows Pro edition); on OSX, use [Microsoft Remote Desktop](https://apps.apple.com/us/app/microsoft-remote-desktop/id1295203466?mt=12).
+You can access our server using a remote desktop client. We will keep the server open at all times during the AE period. 
+On Windows, use remote desktop client app (Only available on Windows Pro edition); on OSX, use [Microsoft Remote Desktop](https://apps.apple.com/us/app/microsoft-remote-desktop/id1295203466?mt=12).
 
 Connect to remote using the following credential:
 
@@ -63,24 +66,12 @@ Open directory `syn` on the desktop.
 Double-click `acc.bat` (Fig. 11(a)), and `density.bat` (Fig. 11(b) and (c)) to run the experiments.
 
 <div style="text-align:center;">
-    <img src="https://user-images.githubusercontent.com/44594966/152480130-0e88e3e5-153f-40e9-a6fb-8218fddf41d5.PNG" alt="syn" width="450" height="300"/>
+    <img src="https://user-images.githubusercontent.com/44594966/153794278-f8839b19-5375-49c6-b93a-3f2fe901bc1b.png" alt="syn" width="450" height="300"/>
 </div>
 
 By default parameter setting, `acc.bat` takes about 15 minutes and `density.bat` takes 5 hours.
 For shorter experiments, the `dag_num` and `instance_num` parameters can be reduced. If `dag_num` is 100, `acc.bat` takes only 10 seconds and `density.bat` takes about 3 minutes.
 For details, refer to **Configurable parameter** section.
-
-### Running experiment on local machine
-
-In the case of Experiment (a), since it is simply a python script, it can be executed on your local machine. After you clone our public repository and install only a few python package, you can run execution file in the same way.
-
-```
-git clone https://github.com/Spiraline/RTAS2022-DAGGen -b AEC syn
-python -m pip install -U PyYAML
-python -m pip install matplotlib pandas
-```
-
-<div style="page-break-after: always;"></div>
 
 ## What to expect
 Fig. 11(a) shows the statistics (i.e., mean, quartiles, minimum and maximum value) of the achieved accuracy by the baseline and our methods. 
@@ -91,6 +82,7 @@ The critical failure can happen (1) when the achieved accuracy is lower than the
 
 Fig. 11(c) reports the breakdown of the reasons for the critical failures of Base Small and Base Large.
 
+<div style="page-break-after: always;"></div>
 
 ## Design
 
@@ -200,7 +192,7 @@ Computer 2 runs the [SVL simulator](https://www.svlsimulator.com/). The simulato
 3. Navigate to the **Simulations** tab. Click the simulation instance named **API Only**. The simulator is now ready.
 
 <div style="text-align:center;">
-    <img src="https://user-images.githubusercontent.com/44594966/153361776-a2bf7a59-0f6c-453d-b142-118593afbfbc.png" alt="svl_simul" height="220"/>
+    <img src="https://user-images.githubusercontent.com/44594966/153797660-90157f29-02da-4d98-b216-7533ac599bb0.png" alt="svl_simul" height="220"/>
     <img src="https://user-images.githubusercontent.com/44594966/153362103-575dee89-43a8-4833-a0e9-c068362900a6.png" alt="svl_simul" height="220"/>
 </div>
 
@@ -224,7 +216,7 @@ Computer 2 runs the [SVL simulator](https://www.svlsimulator.com/). The simulato
 3. Click **Run Simulation** on SVL website. Simulator app will now display **API ready**.
 
 <div style="text-align:center;">
-    <img src="https://user-images.githubusercontent.com/44594966/153367001-576b4bce-59e9-4678-bf20-81837329bd87.png" alt="run_sim" height="300"/>
+    <img src="https://user-images.githubusercontent.com/44594966/153797743-b7611147-1089-44da-9932-f582e269a1d7.png" alt="run_sim" height="300"/>
 </div>
 
 <div style="page-break-after: always;"></div>
@@ -388,3 +380,17 @@ The meaning and a brief explanation of each parameter are as follows.
 The experiment in the paper executes the AD stack directly on the host machine, not on a virtual machine. Therefore, quantitative values such as WCET may differ according to differences in machine performance.
 
 Also, NDT is a probability-based algorithm. Therefore, even if the experiment is carried out under the same conditions, the driving may succeed or fail.
+
+## Local Setup
+
+### Running experiment (a) on local machine
+
+In the case of Experiment (a), since it is simply a python script, it can be executed on your local machine. After you clone our public repository and install only a few python package, you can run execution file in the same way.
+
+```
+git clone https://github.com/Spiraline/RTAS2022-DAGGen -b AEC syn
+python -m pip install -U PyYAML
+python -m pip install matplotlib pandas
+```
+
+### Running experiment (b) on local machine
