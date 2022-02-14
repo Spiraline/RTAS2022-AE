@@ -233,7 +233,7 @@ Computer 2 runs the [SVL simulator](https://www.svlsimulator.com/). The simulato
     <img src="https://user-images.githubusercontent.com/44594966/153531678-45471dc1-3273-4b38-b33c-a33bdb8241e0.png" alt="svl_sim" height="220"/>
 </div>
 
-5. Observe the vehicle moving in the SVL simulator window. The experiment will automatically end after 100s.
+5. Vehicle will start driving after about 20s. Observe the vehicle moving in the SVL simulator window. The experiment will automatically end after 100s.
 
     - You can right-click and drag to change the view angle
     - Press `w`/`s` keys to zoom in/out.
