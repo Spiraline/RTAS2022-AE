@@ -76,7 +76,7 @@ For details, refer to **Configurable parameter** section.
 ## What to expect
 Fig. 11(a) shows the statistics (i.e., mean, quartiles, minimum and maximum value) of the achieved accuracy by the baseline and our methods. 
 
-Fig. 11(b) compares the critical failure ratios by the above four methods as increasing the DAG's density $\rho$.
+Fig. 11(b) compares the critical failure ratios by the above four methods as increasing the DAG's density *ρ*.
 
 The critical failure can happen (1) when the achieved accuracy is lower than the acceptable threshold or (2) when the DAG execution misses the deadline.
 
@@ -96,7 +96,7 @@ In the case of a density experiment (`density.bat`), it additionally schedules t
 
 The results of each experiment are saved in the `syn/res` directory in the form of csv and image.
 Each row in `acc.csv` means the final accuracy reached for each approach.
-`density_X.csv` indicates the frequency of occurrence for each type of critical failure at a density of $0.X$.
+`density_X.csv` indicates the frequency of occurrence for each type of critical failure at a density of 0.X.
 In our cases, unacceptable accuracy may exist, but critical failure due to unacceptable accuracy is not considered because safety backup exists.
 
 <div style="text-align:center;">
@@ -126,17 +126,17 @@ The meaning and a brief explanation of each parameter are as follows.
 |`std_range`|[start, end, step]|100 times scale range of std to experiment with|Only valid when `exp` is `std`|
 |`dag_num`| int | The number of DAG tasks<br/>to experiment with |A larger value can lead to more accurate results, but the experiment takes longer|
 |`instance_num`| int |The number of instances to experiment with a single DAG task|same as `dag_num`|
-|`core_num`| int |The number of cores $M$|When it is large, generating a feasible DAG with a large density is more difficult|
-|`node_num`| [mean, dev] |The number of nodes $N$ |randomly selected from<br/>`[mean-dev, mean+dev]`|
-|`depth`| [mean, dev] |The depth of DAG|If the depth is small and the $N$ is large, the DAG will have large width|
-|`exec_t`| [mean, dev] |The execution time of node|mean represents $e_{avg}$|
+|`core_num`| int |The number of cores *M*|When it is large, generating a feasible DAG with a large density is more difficult|
+|`node_num`| [mean, dev] |The number of nodes *N* |randomly selected from<br/>`[mean-dev, mean+dev]`|
+|`depth`| [mean, dev] |The depth of DAG|If the depth is small and the *N* is large, the DAG will have large width|
+|`exec_t`| [mean, dev] |The execution time of node|mean represents&nbsp; <img src="https://user-images.githubusercontent.com/44594966/153800688-0335d69e-72bf-44e0-a052-22b3b933bafd.png" height="12">|
 |`backup_ratio`| float |The execution time ratio of backup node|Larger value is more likely to cause deadline miss |
-|`sl_unit`| float |$e_{s,1}$|-|
-|`sl_exp`| float |$A(L) = 1 - e^{-L/sl\_exp + ln0.3} - abs(\delta)$ |With small `sl_exp`, the acceptable accuracy is reached with fewer loop counts|
-|`sl_std`| float |$\sigma$|A large $\sigma$ models a harsh physical situation with a high probability of physical errors<br/>(Not required in `std` experiment)|
+|`sl_unit`| float |<img src="https://user-images.githubusercontent.com/44594966/153800354-76fa56fb-99b0-446b-86a5-d58acca85a07.png" height="12">|-|
+|`sl_exp`| float |<img src="https://user-images.githubusercontent.com/44594966/153800585-24904545-c2a7-4197-8abc-3986b5115818.png" height="20">|With small `sl_exp`, the acceptable accuracy is reached with fewer loop counts|
+|`sl_std`| float |*σ*|A large *σ* models a harsh physical situation with a high probability of physical errors<br/>(Not required in `std` experiment)|
 |`acceptance_threshold`| int |Acceptable accuracy<br/>in 100 times scale|If the value is small, the acceptable accuracy is reached with fewer loop counts|
 |`baseline`| [small, large] |The max loop count for `BaseLine Small` and `BaseLine Large`|Larger value is more likely to cause deadline miss, and smaller value is more likely to cause unaccpetable accuracy|
-|`density`| float | The density of DAG task $\rho$ |deadline $D = \frac{e_{avg} \times N}{\rho \times M}$<br/>(Not required in `density` experiment)|
+|`density`| float | The density of DAG task *ρ* |deadline <img src="https://user-images.githubusercontent.com/44594966/153800859-fde2b68e-76ba-4a8f-a3de-a1efffed1d1b.png" height="20"><br/>(Not required in `density` experiment)|
 |`dangling_ratio`| float | Dangling DAG node # / total node # |Larger value makes the backup DAG simpler|
 
 <div style="page-break-after: always;"></div>
@@ -294,7 +294,7 @@ Double-click `impl/get_plot.bat` and enter the password (rtas) to copy image fil
 
 Fig. 1(b) shows the accuracy according to the loop count in several cases. In some cases, you will see the `ndt_matching`, i.e., the self-looping module never reaches the acceptable accuracy even though the loop is repeated to the maximum.
 
-In Fig. 13, you will see the trend line of `ndt_matching`, which means $e_{s,1}$.
+In Fig. 13, you will see the trend line of `ndt_matching`, which means&nbsp; <img src="https://user-images.githubusercontent.com/44594966/153800354-76fa56fb-99b0-446b-86a5-d58acca85a07.png" height="12">.
 
 In Fig. 15(a), you will see that car always keeps close to the lane center.
 In Fig. 15(b), you will see that the execution of `ndt_matching` does not exceed the budget, i.e., horizontal line.
@@ -319,22 +319,22 @@ If the experiment does not run normally due to the incorrect configuration, you 
 
 The meaning and a brief explanation of each parameter are as follows.
 
-#### Common parameter
+### Common parameter
 
 | parameter | description | effect |
 |:--:|:--:|:--:|
 |`res_t_log`|Decide whether to log response time|-|
 |`ndt_lkas_flag`|Decide whether to activate safety guarantee mechanism|-|
-|`pnorm_threshold`|$1-pnorm\_threshold$ will be accuracy threshold<br/>to activate safety backup|Smaller value activates<br/>safety backup more frequently|
+|`pnorm_threshold`|*1-pnorm\_threshold* will be accuracy threshold<br/>to activate safety backup|Smaller value activates<br/>safety backup more frequently|
 
-#### voxel_grid_filter
+### voxel_grid_filter
 
 | parameter | description | effect |
 |:--:|:--:|:--:|
 |`leaf_size`|Filtering strength for input pointcloud|Smaller value makes the execution longer|
 |`measurement_range`|Filtering range|Larger value makes the execution longer|
 
-#### ndt_matching
+### ndt_matching
 
 | parameter | description | effect |
 |:--:|:--:|:--:|
@@ -342,17 +342,17 @@ The meaning and a brief explanation of each parameter are as follows.
 |`time_wall`|Budget for self-looping node|Only valid when `ndt_lkas_flag` is `true`|
 |`accuracy_log`|Decide whether to log accuracy<br/>according to the loop count|-|
 
-#### ndt_config
+### ndt_config
 
 | parameter | description | effect |
 |:--:|:--:|:--:|
 |`init_*`|Where to start localization|The closer it is to the actual vehicle location,<br/>the better the first localization is|
 |`resolution`|Grid size using in NDT algorithm|Larger value may improve localization quality<br/>but makes the execution longer|
 |`step_size`|Maximum gradient update in one loop|Too large value leads to worse localization quality|
-|`trans_epsilon`|$1-trans\_epsilon$ will be<br/>accuracy threshold for localization|Small values makes localization harder|
+|`trans_epsilon`|*1-trans\_epsilon* will be<br/>accuracy threshold for localization|Small values makes localization harder|
 |`max_iterations`|Maximum self-looping count|Only valid when `ndt_lkas_flag` is `false`|
 
-#### lidar_euclidean_cluster_detect
+### lidar_euclidean_cluster_detect
 
 | parameter | description | effect |
 |:--:|:--:|:--:|
@@ -361,7 +361,7 @@ The meaning and a brief explanation of each parameter are as follows.
 |`cluster_size_min`|Minimum number of points in one cluster|-|
 |`cluster_size_max`|Maximum number of points in one cluster|-|
 
-#### op_common_params
+### op_common_params
 
 | parameter | description | effect |
 |:--:|:--:|:--:|
@@ -371,7 +371,7 @@ The meaning and a brief explanation of each parameter are as follows.
 |`width`|Width of vehicle|Determine safety border of vehicle|
 |`length`|Length of vehicle|same as `width`|
 
-#### op_global_planner
+### op_global_planner
 
 | parameter | description | effect |
 |:--:|:--:|:--:|
